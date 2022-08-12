@@ -10,6 +10,7 @@
       <TargetName>PWM DAC</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pArmCC>5060960::V5.06 update 7 (build 960)::.\ARM_Compiler_5.06u7</pArmCC>
       <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARM_Compiler_5.06u7</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
@@ -340,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F40_41xxx,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CORE;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\HARDWARE\LED;..\FWLIB\inc;..\HARDWARE\servo</IncludePath>
+              <IncludePath>..\CORE;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\HARDWARE\LED;..\FWLIB\inc;..\HARDWARE\servo;..\HARDWARE\valve</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -413,6 +414,11 @@
               <FileName>servo.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\servo\servo.c</FilePath>
+            </File>
+            <File>
+              <FileName>valve.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\valve\valve.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -515,5 +521,14 @@
     <components/>
     <files/>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>PWM DAC</LayName>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>

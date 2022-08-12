@@ -2,7 +2,7 @@
 
 //#include "sys.h"
 #include "servo.h"
-#include <stm32f4xx_tim.h>
+//#include <stm32f4xx_tim.h>
 
 
 
@@ -44,6 +44,3 @@ void TIM2_PWM_Init(u32 arr,u32 psc)
 	
 	TIM_Cmd(TIM2, ENABLE);  //使能TIM2										  
 }  
-
-
-
