@@ -13,24 +13,20 @@
 //广州市星翼电子科技有限公司  
 //作者：正点原子 @ALIENTEK
  
-
+int i = 0;
   
 int main(void)
 { 
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	//TIM2_PWM_Init(200-1,8400-1);199,7199
-	TIM2_PWM_Init(199,7199);
+	TIM2_PWM_Init(2000 - 1, 1680);//168000000 100000
 	delay_init(168);		  //初始化延时函数
-	LED_Init();		        //初始化LED端口
+	LED_Init();	
+	//初始化LED端口
+	
 	
 	while(1)
 	{
-//	GPIO_ResetBits(GPIOF,GPIO_Pin_9);  //LED0对应引脚GPIOF.9拉低，亮  等同LED0=0;
-//	GPIO_SetBits(GPIOF,GPIO_Pin_10);   //LED1对应引脚GPIOF.10拉高，灭 等同LED1=1;
-//	delay_ms(500);  		   //延时300ms
-//	GPIO_SetBits(GPIOF,GPIO_Pin_9);	   //LED0对应引脚GPIOF.0拉高，灭  等同LED0=1;
-//	GPIO_ResetBits(GPIOF,GPIO_Pin_10); //LED1对应引脚GPIOF.10拉低，亮 等同LED1=0;
-//	delay_ms(500);                     //延时300ms
 //		LED0=0;
 //		LED1=1;
 //		delay_ms(1000);
@@ -53,15 +49,26 @@ int main(void)
 //		delay_ms(1000);
 //		LED0=1;
 //		LED1=0;
-
+			 
+//		TIM_SetCompare1(TIM2, 60);
 //		delay_ms(1000);
-		delay_ms(1000);	 
-		TIM_SetCompare1(TIM2,175);	//修改比较值，修改占空比对应180度
+//		TIM_SetCompare1(TIM2, 150);
+//		delay_ms(1000);
+//		TIM_SetCompare1(TIM2, 240);
+//		delay_ms(1000);
 		
 // 
-
-
- 
+		//TIM_SetCompare1(TIM2, i);
+		for(i = 23; i <= 127; i++)
+		{
+			TIM_SetCompare1(TIM2, i);
+			delay_ms(10);
+		}
+		for(i = 127; i >= 23; i--)
+		{
+			TIM_SetCompare1(TIM2, i);
+			delay_ms(10);
+		}
 
 	}
 
