@@ -26,8 +26,8 @@ int main(void)
 	//��ʼ��LED�˿�
 	
 	
-	while(1)
-	{
+//	while(1)
+//	{
 //		LED0=0;
 //		LED1=1;
 
@@ -41,15 +41,24 @@ int main(void)
 //			TIM_SetCompare1(TIM2, i);
 //			delay_ms(10);
 //		}
+		delay_ms(2000);		
+		valveSwitch(0);//0开，1关
+		delay_ms(2000);
+		TIM_SetCompare1(TIM2,95);//66中间,80向下，94,95,43	
+		delay_ms(2000);		
+		valveSwitch(1);//0开，1关
+	
+		delay_ms(2000);
+		TIM_SetCompare1(TIM2,43);//66中间,80向下，94,95,43	
+		delay_ms(2000);
+		valveSwitch(0);//0开，1关
+		delay_ms(2000);
+		TIM_SetCompare1(TIM2,66);//66中间,80向下，95,43	
+		delay_ms(2000);
 		
-		TIM_SetCompare1(TIM2, i);
-		
-		//valveSwitch(0);
-//		delay_ms(1000);
-//		valveSwitch(1);
-//		delay_ms(1000);
 
-	}
+
+	//}
 
 
 }
