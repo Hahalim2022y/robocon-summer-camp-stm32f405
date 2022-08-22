@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F40_41xxx,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CORE;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\HARDWARE\LED;..\FWLIB\inc;..\HARDWARE\servo;..\HARDWARE\valve;..\HARDWARE\Limit_Switch</IncludePath>
+              <IncludePath>..\CORE;..\SYSTEM\delay;..\SYSTEM\sys;..\USER;..\HARDWARE\LED;..\FWLIB\inc;..\HARDWARE\servo;..\HARDWARE\valve;..\HARDWARE\Limit_Switch;..\HARDWARE\USART</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -420,6 +420,16 @@
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\Limit_Switch\Limit_Switch.c</FilePath>
             </File>
+            <File>
+              <FileName>USART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\USART\USART.c</FilePath>
+            </File>
+            <File>
+              <FileName>cycleArray.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\USART\cycleArray.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -434,11 +444,6 @@
               <FileName>sys.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\sys\sys.c</FilePath>
-            </File>
-            <File>
-              <FileName>usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\usart\usart.c</FilePath>
             </File>
           </Files>
         </Group>

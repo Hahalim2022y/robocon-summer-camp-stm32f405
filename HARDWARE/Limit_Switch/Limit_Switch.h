@@ -6,8 +6,8 @@
 #include "delay.h"
 #include "servo.h"
 #include "valve.h"
+#include "USART.h"
 
-void GUA_Limit_Switch_Init(void);
-void GUA_Limit_Switch_Check(void);  
+void Limit_Switch_Init(void);
  
 #endif

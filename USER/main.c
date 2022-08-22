@@ -1,27 +1,33 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "sys.h"
 #include "delay.h"
-#include "usart.h"
+#include "USART.h"
 #include "Limit_Switch.h"
+#include "servo.h"
+#include "valve.h"
+
  
  
-//ALIENTEK ÃΩÀ˜’ﬂSTM32F407ø™∑¢∞Â  µ—È22
-//PWM DAC  µ—È  -ø‚∫Ø ˝∞Ê±æ
-//ºº ı÷ß≥÷£∫www.openedv.com
-//Ã‘±¶µÍ∆Ã£∫http://eboard.taobao.com  
-//π„÷› ––«“ÌµÁ◊”ø∆ºº”–œﬁπ´Àæ  
-//◊˜’ﬂ£∫’˝µ„‘≠◊” @ALIENTEK
- 
-int i = 0;
-  
 int main(void)
 { 
+	u8 res;
+	u16 gray_res;
+	char command[100];
+	u8 commandCnt = 0;
+	u8 commandFinish = 0;
+	
+	u8 Limit_Switch_flag = 0;
+
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	//TIM2_PWM_Init(200-1,8400-1);199,7199
 	TIM2_PWM_Init(2000 - 1, 1680 - 1);//168000000 100000
-	delay_init(168);		  //≥ı ºªØ—” ±∫Ø ˝
+	delay_init(168);		  
 	LED_Init();	
 	valveInit();
-	GUA_Limit_Switch_Init();
+	Limit_Switch_Init();
+	uart1_init(115200);
 	
 	
 	while(1)
@@ -49,7 +55,6 @@ int main(void)
 //		TIM_SetCompare1(TIM2,95);//66‰∏≠Èó¥,80Âêë‰∏ãÔºå94,95,43	
 //		delay_ms(2000);		
 //		valveSwitch(1);//0ÂºÄÔºå1ÂÖ≥
-//	
 //		delay_ms(2000);
 //		TIM_SetCompare1(TIM2,43);//66‰∏≠Èó¥,80Âêë‰∏ãÔºå94,95,43	
 //		delay_ms(2000);
@@ -58,14 +63,76 @@ int main(void)
 //		TIM_SetCompare1(TIM2,66);//66‰∏≠Èó¥,80Âêë‰∏ãÔºå95,43	
 //		delay_ms(2000);
 		
+		while(1)
+		{
+			if(uart1_read(&res) == 1)
+			{
+				if(res != '\n')
+				{
+					command[commandCnt] = res;
+				}
+				else
+				{
+					command[commandCnt] = '\0';
+					commandFinish = 1;
+					commandCnt = 0;
+					break;
+				}
+			}
+			else
+			{
+				break;
+			}
+			commandCnt++;
+		}
+		if(commandFinish == 1)
+		{
+			uart1_send(command);
+			uart1_send("\n");
+			commandFinish = 0;
+			
+			if(strcmp(command, "putdown\r") == 0)
+			{
+				valveSwitch(0);
+				TIM_SetCompare1(TIM2,97);
+			}
 
-		GUA_Limit_Switch_Check();
-		//TIM_SetCompare1(TIM2,35);
-	}
+	    }
+		if(GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_3) == 1 || GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_2) == 1)
+		{
+			LED0=1;
+			LED1=0; 
+			valveSwitch(1);
+			if(Limit_Switch_flag == 0)
+			{
+				uart1_send("turnback\n");
+				Limit_Switch_flag =1;
+			}
+			if(strcmp(command, "flipped\r") == 0)
+			{
+				TIM_SetCompare1(TIM2,43);
+				delay_ms(2000);
+				valveSwitch(0);//0ÂºÄÔºå1ÂÖ≥
+				delay_ms(1000);
+				for(int i=43;i<67;i++)
+				{
+					TIM_SetCompare1(TIM2,i);
+					delay_ms(100);
+				}
+				//TIM_SetCompare1(TIM2,35);
+				
+			}
+			
+		}  
+//		else if(Limit_Switch_flag ==1)
+//		{
+//			TIM_SetCompare1(TIM2,66);
+//			//TIM_SetCompare1(TIM2,43);
+//		}
 
 		
+	}
 }
-
 
 
 
