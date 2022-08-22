@@ -1,9 +1,7 @@
 #include "sys.h"
 #include "delay.h"
 #include "usart.h"
-#include "led.h"
-#include "servo.h"
-#include "valve.h"
+#include "Limit_Switch.h"
  
  
 //ALIENTEK Ì½Ë÷ÕßSTM32F407¿ª·¢°å ÊµÑé22
@@ -23,13 +21,16 @@ int main(void)
 	delay_init(168);		  //³õÊ¼»¯ÑÓÊ±º¯Êý
 	LED_Init();	
 	valveInit();
-	//³õÊ¼»¯LED¶Ë¿Ú
+	GUA_Limit_Switch_Init();
 	
 	
-//	while(1)
-//	{
+	while(1)
+	{
 //		LED0=0;
 //		LED1=1;
+//		delay_ms(1000);
+//		LED0=0;
+//		LED1=0;
 
 //		for(i = 23; i <= 127; i++)
 //		{
@@ -41,26 +42,28 @@ int main(void)
 //			TIM_SetCompare1(TIM2, i);
 //			delay_ms(10);
 //		}
-		delay_ms(2000);		
-		valveSwitch(0);//0å¼€ï¼Œ1å…³
-		delay_ms(2000);
-		TIM_SetCompare1(TIM2,95);//66ä¸­é—´,80å‘ä¸‹ï¼Œ94,95,43	
-		delay_ms(2000);		
-		valveSwitch(1);//0å¼€ï¼Œ1å…³
-	
-		delay_ms(2000);
-		TIM_SetCompare1(TIM2,43);//66ä¸­é—´,80å‘ä¸‹ï¼Œ94,95,43	
-		delay_ms(2000);
-		valveSwitch(0);//0å¼€ï¼Œ1å…³
-		delay_ms(2000);
-		TIM_SetCompare1(TIM2,66);//66ä¸­é—´,80å‘ä¸‹ï¼Œ95,43	
-		delay_ms(2000);
+
+//		delay_ms(2000);		
+//		valveSwitch(0);//0å¼€ï¼Œ1å…³
+//		delay_ms(2000);
+//		TIM_SetCompare1(TIM2,95);//66ä¸­é—´,80å‘ä¸‹ï¼Œ94,95,43	
+//		delay_ms(2000);		
+//		valveSwitch(1);//0å¼€ï¼Œ1å…³
+//	
+//		delay_ms(2000);
+//		TIM_SetCompare1(TIM2,43);//66ä¸­é—´,80å‘ä¸‹ï¼Œ94,95,43	
+//		delay_ms(2000);
+//		valveSwitch(0);//0å¼€ï¼Œ1å…³
+//		delay_ms(2000);
+//		TIM_SetCompare1(TIM2,66);//66ä¸­é—´,80å‘ä¸‹ï¼Œ95,43	
+//		delay_ms(2000);
 		
 
+		GUA_Limit_Switch_Check();
+		//TIM_SetCompare1(TIM2,35);
+	}
 
-	//}
-
-
+		
 }
 
 

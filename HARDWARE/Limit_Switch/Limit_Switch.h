@@ -1,0 +1,13 @@
+#ifndef _LIMIT_SWITCH_H_
+#define _LIMIT_SWITCH_H_
+ 
+#include <stm32f4xx.h>
+#include "led.h"
+#include "delay.h"
+#include "servo.h"
+#include "valve.h"
+
+void GUA_Limit_Switch_Init(void);
+void GUA_Limit_Switch_Check(void);  
+ 
+#endif

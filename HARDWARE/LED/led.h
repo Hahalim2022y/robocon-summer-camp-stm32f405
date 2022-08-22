@@ -16,9 +16,9 @@
 ////////////////////////////////////////////////////////////////////////////////// 	
 
 
-//LED端口定义
-#define LED0 PAout(4)	// DS0
-#define LED1 PCout(4)	// DS1	 
+
+#define LED0 PAout(4)	// 绾㈣壊鐨勭伅
+#define LED1 PCout(4)	// 绮夎壊鐨勭伅
 
 void LED_Init(void);//初始化		 				    
 #endif
