@@ -45,9 +45,6 @@ void GUA_Limit_Switch_Check(void)
 			TIM_SetCompare1(TIM2,i);
 			delay_ms(100);
 		}
-//		TIM_SetCompare1(TIM2,76);
-//		delay_ms(1000);
-//		TIM_SetCompare1(TIM2,66);//66中间,80向下，95,43	
 		//TIM_SetCompare1(TIM2,35);
 		flag =1;
     }  
